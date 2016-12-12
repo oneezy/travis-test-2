@@ -1,0 +1,23 @@
+language: node_js
+node_js: stable
+sudo: required
+dist: trusty
+addons:
+  firefox: latest
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+install:
+- npm install -g bower polymer-cli
+- npm install
+- bower install
+script:
+- xvfb-run polymer test
+after_success:
+- if [ "$TRAVIS_BRANCH" = "master" ]; then ./gpages_build.sh "Justin O'Neill'" justin@oneezy.com;
+  fi
+env:
+  global:
+    secure: Pu4S96ratX71rKlZ/bHAwY6CF1TQmrhCGAVcYLMd0xE9B9jH2vyQtt7T+By8OPRVKPvZ0Mu0nFS8I4PBIm/GBmYxnznBDbj4hAngNeLM4//d6gEvpHVxL4untH02qgeeRkPTDfkD1v1pXgErm691rzDB6Czbz4sg3X9TgGPvZJwBzRcd9qW1qUDgjmLXHxmiQ35LE895POMzNCmB5qjIodZ3Vyuom+Xh1AacZIfl92AvrHCpt2y+3fQYL0y8WndtETHghjJIC1Dpqo1hkW1q1c3bFQkSgPUxDP8Ue0pOG0ZR64hk7nNWQXFLqunVDaQzkSYzP7TMVOUo53F4nfZUBspAuOGalRzOHJ6x8DUwTeYrB5ez3c7eOuO8TfzNv03eIPZZQHy80/r2LJa4B9uQJJKMhVf665+4OssQhV9EQIRrwrZgRV+PBNZSIWurN0qawpilGS9czyr+2zvX5SpQXF0uLiW/O86g8q228CLcIr6y1+YLBcOXI77LiBtDaKY8cbACovMoXgCd3UjLw3M2smLXvqN3B+7pDgnJx2n7m/Gs6cKK43NO1l4Wo7Q4yUiGqmeAW4kiDFkt8aBlcasiIUm7YZir8cxpQoYpEnCtsamhl7wPrZisVelg8lh3uYqyA76rwR65ilV9Tww40uRXPux2mWKjTQi64HNUTfcnj6A=
